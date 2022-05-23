@@ -10,7 +10,7 @@ node app.js
 
 Features
 ---
-Compared to Omegle, epsile isn't close to it in features
+Compared to Omegle, Chit-chat isn't close to it in features
 * You can chat with another stranger. If there is no other stranger you'll have to wait.
 * If you don't have the tab focused you'll get a popup if someone sends you a message.
 * URLs in chat messages are clickable, and opens in a new tab when clicked. Don't click on links from strangers you don't trust!
