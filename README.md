@@ -1,10 +1,13 @@
-# Chat-application using JavaScript , Socket.io , nodejs
-Download the code.
+# Chat-application 
+using JavaScript , Socket.io , nodejs.
 
+Run the following commands
 
-run npm install express socket.io
+npm install express socket.io
+
 node app.js
-enjoy...
+
+
 Features
 ---
 Compared to Omegle, epsile isn't close to it in features
