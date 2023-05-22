@@ -13,6 +13,6 @@ RUN npm install
 
 # npm install express socket.io
 
-node app.js
+# node app.js
 # Define the entry point for the container
 CMD ["npm", "start"]
