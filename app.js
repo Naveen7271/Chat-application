@@ -26,9 +26,7 @@ app.use(express.static(__dirname + '/'));
 // global variables, keeps the state of the app
 var sockets = {},
 	users = {},
-	strangerQueue = false,
-	peopleActive = 0,
-	peopleTotal = 0;
+	strangerQueue = false;
 
 // helper functions, for logging
 function fillZero (val) {
@@ -64,10 +62,8 @@ io.sockets.on('connection', function (socket) {
 		strangerQueue = socket.id;
 	}
 
-	peopleActive++;
-	peopleTotal++;
-	console.log(timestamp(), peopleTotal, "connect");
-	io.sockets.emit('stats', {people: peopleActive});
+	console.log(timestamp(), io.engine.clientsCount, "connect");
+	io.sockets.emit('stats', {people: io.engine.clientsCount});
 
 	socket.on("new", function () {
 		
@@ -83,8 +79,7 @@ io.sockets.on('connection', function (socket) {
 		} else {
 			strangerQueue = socket.id;
 		}
-		peopleActive++;
-		io.sockets.emit('stats', {people: peopleActive});
+		io.sockets.emit('stats', {people: io.engine.clientsCount});
 	});
 	
 	// Conversation ended
@@ -101,8 +96,7 @@ io.sockets.on('connection', function (socket) {
 			sockets[connTo].emit("disconn", {who: 2});
 		}
 		socket.emit("disconn", {who: 1});
-		peopleActive -= 2;
-		io.sockets.emit('stats', {people: peopleActive});
+		io.sockets.emit('stats', {people: io.engine.clientsCount});
 	});
 	socket.on('chat', function (message) {
 		if (users[socket.id].connectedTo !== -1 && sockets[users[socket.id].connectedTo]) {
@@ -129,7 +123,6 @@ io.sockets.on('connection', function (socket) {
 			sockets[connTo].emit("disconn", {who: 2, reason: err && err.toString()});
 			users[connTo].connectedTo = -1;
 			users[connTo].isTyping = false;
-			peopleActive -= 2;
 		}
 
 		delete sockets[socket.id];
@@ -137,11 +130,9 @@ io.sockets.on('connection', function (socket) {
 
 		if (strangerQueue === socket.id || strangerQueue === connTo) {
 			strangerQueue = false;
-			peopleActive--;
 		}
-		peopleTotal--;
-		console.log(timestamp(), peopleTotal, "disconnect");
-		io.sockets.emit('stats', {people: peopleActive});
+		console.log(timestamp(), io.engine.clientsCount, "disconnect");
+		io.sockets.emit('stats', {people: io.engine.clientsCount});
 		
 	});
 });

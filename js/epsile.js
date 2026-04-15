@@ -244,6 +244,27 @@ var Epsile = new function () {
 		chatArea.style.width = (window.innerWidth-94)+"px";
 	}*/
 
+	this.toggleTheme = function () {
+		var body = document.body;
+		var icon = domID('themeIcon');
+		body.classList.toggle('light-theme');
+		var isLight = body.classList.contains('light-theme');
+		icon.innerHTML = isLight ? '☀️' : '🌙';
+		localStorage.setItem('theme', isLight ? 'light' : 'dark');
+	};
+
+	this.goHome = function () {
+		if (socket) {
+			socket.emit("disconn");
+			socket.disconnect();
+			socket = null;
+		}
+		chatWindow.style.display = 'none';
+		welcomeScreen.style.display = 'flex'; // Changed to flex for centering
+		chatMainDiv.innerHTML = "";
+		setTyping(false);
+	};
+
 	function onReady() {
 		/*if (window.opera) {
 			var operacss = document.createElement("link");
@@ -253,6 +274,13 @@ var Epsile = new function () {
 		}*/
 		//resizeWindow();
 		
+		// Initialize theme
+		var savedTheme = localStorage.getItem('theme');
+		if (savedTheme === 'light') {
+			document.body.classList.add('light-theme');
+			domID('themeIcon').innerHTML = '☀️';
+		}
+
 		startButton.disabled = false;
 		startButton.focus();
 		
