@@ -2,7 +2,7 @@
 
 **Bachelor of Engineering (Computer Science) Final Year Project**
 
-🟢 **[View the Live Application Here](https://your-live-website-link-here.com)**
+🟢 **[View the Live Application Here](https://chatapplication-c4q2n4la.b4a.run/)**
 
 > **Note to Reviewers (2026 Update):** The core backend architecture, socket connections, and routing logic of this project remain exactly as they were submitted for my final year degree evaluation in 2023. Recently, the `README.md` and basic CSS styling were updated to improve documentation and accessibility for portfolio review purposes, alongside 1-2 minor bug patches to ensure the application runs smoothly in current environments. The underlying engineering reflects my original undergraduate work.
 
