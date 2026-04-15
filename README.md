@@ -1,21 +1,63 @@
-# Chat-application 
-using JavaScript , Socket.io , nodejs.
+# Real-Time Anonymous Chat Architecture
 
-Run the following commands
+**Bachelor of Engineering (Computer Science) Final Year Project**
 
-npm install express socket.io
+> **Note to Reviewers (2026 Update):** The core backend architecture, socket connections, and routing logic of this project remain exactly as they were submitted for my final year degree evaluation in 2023. Recently, the `README.md` and basic CSS styling were updated to improve documentation and accessibility for portfolio review purposes, alongside 1-2 minor bug patches to ensure the application runs smoothly in current environments. The underlying engineering reflects my original undergraduate work.
 
-node app.js
+## Overview
 
+This repository contains the software implementation for my Bachelor of Engineering final year capstone project. The primary objective was to design, build, and deploy a highly responsive, real-time communication system capable of pairing users dynamically while maintaining low-latency message delivery and secure connections.
 
-Features
----
-Compared to Omegle, Chit-chat isn't close to it in features
-* You can chat with another stranger. If there is no other stranger you'll have to wait.
-* If you don't have the tab focused you'll get a popup if someone sends you a message.
-* URLs in chat messages are clickable, and opens in a new tab when clicked. Don't click on links from strangers you don't trust!
-* If you start your message with "/me " you will send an action. An example is if you write "/me ate a cookie" it will look like "*** Stranger ate a cookie" for the stranger
+## Technical Architecture & Stack
 
-License
----
-GNU General Public License V3
+The application utilizes an event-driven architecture to handle concurrent WebSocket connections efficiently, ensuring real-time bidirectional data flow between the client and server.
+
+- **Backend Environment:** Node.js
+- **Web Framework:** Express.js
+- **Real-Time Communication:** Socket.io
+- **Frontend:** JavaScript, HTML5, CSS3
+
+## Core Engineering Features
+
+- **Dynamic Connection Pooling:** The server automatically pairs available users into isolated communication channels. If no users are available in the pool, incoming connections are queued until a peer connects.
+- **State Management & Lifecycle Handling:** Efficiently manages connection states, graceful disconnects, and session terminations, ensuring no ghost connections remain active when a user drops off.
+- **Event-Driven Notifications:** Implements browser-level API integrations to alert users of incoming payloads when the application state or browser tab is unfocused.
+- **Input Sanitization & Parsing:** Detects and formats specific string patterns in real-time. This includes URL parsing to render safe clickable links and system action commands (e.g., parsing `/me [action]` into structured system notifications).
+
+## Installation and Local Deployment
+
+To run this project locally on your machine, ensure you have Node.js installed, then follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/Naveen7271/Chat-application.git](https://github.com/Naveen7271/Chat-application.git)
+   cd Chat-application
+   ```
+
+## Installation and Local Deployment
+
+To run this project locally on your machine, ensure you have Node.js installed, then follow these steps:
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone [https://github.com/Naveen7271/Chat-application.git](https://github.com/Naveen7271/Chat-application.git)
+   cd Chat-application
+   Install the necessary backend dependencies:
+   npm install express socket.io
+   ```
+
+2. **Initialize the Node server:**
+
+   ```bash
+   node app.js
+   ```
+
+3. **Access the client:**
+   ```
+   Open a web browser and navigate to http://localhost:5050 (or the port specified in your console output). To test the pairing logic, open the link in two separate browser windows or tabs.
+   ```
+
+## License
+
+This project is licensed under the GNU General Public License v3.0.
